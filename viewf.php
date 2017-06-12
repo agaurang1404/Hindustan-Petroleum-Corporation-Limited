@@ -1,6 +1,11 @@
 <?php include "config.php"; ?>
 <?php
-//echo
+session_start();
+if (!isset($_SESSION['user']) && !isset($_SESSION['pass'])) {
+	header("Location:error.php");
+}else {
+	$name = $_SESSION['user'];
+}
 $id = $_GET['id'];
 //sql query
 $sql = "SELECT * FROM user where Emp_No = $id";

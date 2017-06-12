@@ -1,6 +1,11 @@
 <?php include "config.php"; ?>
 <?php
-//echo
+session_start();
+if (!isset($_SESSION['user']) && !isset($_SESSION['pass'])) {
+	header("Location:error.php");
+}else {
+	$name = $_SESSION['user'];
+}
 if (isset($_POST['create'])) {
 	$name = $_POST['name'];
 	$password = $_POST['password'];
@@ -64,6 +69,7 @@ if (isset($_POST['create'])) {
 	<li><a href="index.php">SIGN OUT</a></li>
 	<li><a href="add.php">ADD NEW DATA</a></li>
 	<li><a href="admin.php">ADMIN PANEL</a></li>
+	<li><a href="logout.php">LOGOUT</a></li>
 </ul>
 </div>
 <!--<div style="float:left; width:1%; background:#fff; height:100%; margin-top: 7.5%;"></div>-->

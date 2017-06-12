@@ -1,5 +1,11 @@
 <?php include 'config.php'; ?>
 <?php
+session_start();
+if (!isset($_SESSION['user']) && !isset($_SESSION['pass'])) {
+	header("Location:error.php");
+}else {
+	$name = $_SESSION['user'];
+}
 //initializing values
 	$empno = $_POST['empno'];
 	$name = $_POST['name'];

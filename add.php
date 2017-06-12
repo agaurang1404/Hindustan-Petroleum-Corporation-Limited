@@ -1,3 +1,11 @@
+<?php
+session_start();
+if (!isset($_SESSION['user']) && !isset($_SESSION['pass'])) {
+	header("Location:error.php");
+}else {
+	$name = $_SESSION['user'];
+}
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -52,6 +60,7 @@
 	<li><a href="index.php">SIGN OUT</a></li>
 	<li><a href="admin.php">ADMIN PANEL</a></li>
 	<li><a href="create.php">CREATE NEW<br>ACCOUNT</a></li>
+	<li><a href="logout.php">LOGOUT</a></li>
 </ul>
 </div>
 <!--<div style="float:left; width:1%; background:#fff; height:100%; margin-top: 7.5%;"></div>-->

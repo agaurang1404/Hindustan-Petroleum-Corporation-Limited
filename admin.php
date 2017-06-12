@@ -1,5 +1,12 @@
 <?php include "config.php"; ?>
 <?php
+session_start();
+if (!isset($_SESSION['user']) && !isset($_SESSION['pass'])) {
+	header("Location:error.php");
+}else {
+	$name = $_SESSION['user'];
+}
+
 //echo
 //sql query
 $sql = "SELECT * FROM laptop ORDER BY Emp_No DESC";
@@ -8,7 +15,7 @@ $result = $mysqli->query($sql);
 <!DOCTYPE html>
 <html>
 <head>
-	<title>HPCL</title>
+	<title>Logged In As : <?php echo "$name"; ?></title>
 	<link rel="stylesheet" type="text/css" href="stylea.css">
 </head>
 <body>
@@ -21,6 +28,7 @@ $result = $mysqli->query($sql);
 	<li><a href="index.php">SIGN OUT</a></li>
 	<li><a href="add.php">ADD NEW DATA</a></li>
 	<li><a href="create.php">CREATE NEW<br>ACCOUNT</a></li>
+	<li><a href="logout.php">LOGOUT</a></li>
 </ul>
 </div>
 <!--<div style="float:left; width:1%; background:#fff; height:100%; margin-top: 7.5%;"></div>-->

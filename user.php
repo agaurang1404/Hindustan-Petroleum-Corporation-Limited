@@ -1,5 +1,11 @@
 <?php include "config.php"; ?>
 <?php
+session_start();
+if (!isset($_SESSION['user1']) && !isset($_SESSION['pass1'])) {
+	header("Location:error1.php");
+}else {
+	$name = $_SESSION['user1'];
+}
 //echo
 //sql query
 $sql = "SELECT * FROM laptop ORDER BY Emp_No DESC";
@@ -8,7 +14,7 @@ $result = $mysqli->query($sql);
 <!DOCTYPE html>
 <html>
 <head>
-	<title>HPCL</title>
+	<title>Logged in As : <?php echo "$name";?></title>
 	<link rel="stylesheet" type="text/css" href="stylea.css">
 </head>
 <body>
@@ -18,7 +24,7 @@ $result = $mysqli->query($sql);
 <div style="width:100%;border:0px solid #000;">
 <div id="nav_bg" style="float:left; width:13%; background-color:#002233; height:100%; margin-top: 7.5%;">
 <ul>
-	<li><a href="index.php">SIGN OUT</a></li>
+	<li><a href="ulogout.php">LOGOUT</a></li>
 </ul>
 </div>
 <!--<div style="float:left; width:1%; background:#fff; height:100%; margin-top: 7.5%;"></div>-->

@@ -23,8 +23,6 @@
 <div id="nav_bg">
 <ul>
 	<li><a href="index.php">HOME</a></li>
-	<li><a href="organisation.php">ORGANISATION</a></li>
-	<li><a href="contact.php">CONTACT US</a></li>
 	<li id="sec"><a href="login.php">ADMIN LOGIN</a></li>
 </ul>
 </div>

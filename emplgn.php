@@ -2,6 +2,9 @@
 <?php
 //echo 
 if (isset($_POST['login'])) {
+	session_start();
+	$_SESSION['user1'] = $_POST['name'];
+	$_SESSION['pass1'] = $_POST['password'];
 	$name = $_POST['name'];
 	$password = $_POST['password'];
 	$type = "user";
@@ -12,11 +15,7 @@ if (isset($_POST['login'])) {
 	$row = $result->fetch_assoc();
 	if ($name == $row['Username'] && $password == $row['Password'] && $type == $row['Type']) {
 			header("Location:user.php");
-	}else {
-			echo "<script>";
-			echo "alert('Please enter valid login credentials')";
-			echo "</script>";	
-	} 
+	}
 	
 }
 ?>
@@ -35,24 +34,12 @@ if (isset($_POST['login'])) {
 		input[type=text] {
     		border: 2px solid #002266;
     		border-radius: 4px;
-    		color: white;
-		}
-		input[type=text]:focus {
-    		background-color: #002266;
-		}
-		input[type=text]:hover {
-    		background-color: #002266;
+    		color: #002266;
 		}
 		input[type=password] {
     		border: 2px solid #002266;
     		border-radius: 4px;
-    		color: white;
-		}
-		input[type=password]:focus {
-    		background-color: #002266;
-		}
-		input[type=password]:hover {
-    		background-color: #002266;
+    		color: #002266;
 		}
 		legend {
 			background-color: #002266;
@@ -77,6 +64,64 @@ if (isset($_POST['login'])) {
 	text-align: center;
 }
 	</style>
+	<script>
+		function validateform() {
+			var x = document.eloginform.name.value;
+			var y = document.eloginform.password.value;
+			var m = x.length;
+			var n = y.length;
+			 var regexp = /^[A-Z]/; // expression for checking first character as upper case 
+			 var regex = /^[a-zA-Z0-9!@#\$%\^\&*\)\(+=._-]+$/ // regular expression for checking use of special characters
+			 var regexl = /[@]$/ // expression to check last character as @
+			if (x == "" || m>20 || regexp.test(x) || regexl.test(x) || y == "" || n>20 || regexl.test(y)) {
+				if (x == "" || y == "") {
+					/*if (x == "" && y =="") {
+						alert("Please Check the fields, Login Credentials Cannot be empty");
+					}*/
+					if (x == "") {
+						alert ("Please Fill the Username, It cannot be empty");
+						//document.getElementById("password").innerHTML = "";
+						return false
+					}	
+					if (y == "") {
+						alert ("Please Fill the Password, It cannot be empty");
+						//document.getElementById("name").innerHTML = "";
+						return false
+					}		
+				}
+				if (m>20 || n>20) {
+					if (m>20) {
+						alert ("Username cannot be greater than 20 characters");
+						document.getElementById("name").innerHTML = "";
+						return false
+					}
+					if (n>10) {
+						alert ("Password cannot be greater than 10 characters");
+						document.getElementById("password").innerHTML = "";
+						return false
+					}
+					
+				}
+				if (regexp.test(x)) {
+				alert ("Username cannot start with Upper case Character");
+				document.getElementById("name").innerHTML = "";
+				return false	
+				}
+				if (regexl.test(x) || regexl.test(y)) {	
+					if (regexl.test(x)) {
+						alert ("Username cannot end with Special Character");
+						document.getElementById("name").innerHTML = "";
+						return false
+					}
+					if (regexl.test(y)) {
+						alert ("Password cannot end with Special Character");
+						document.getElementById("password").innerHTML = "";
+						return false
+					}	
+				}
+			}
+		}
+	</script>
 </head>
 <body>
 <div id="logo" style="top:0; position: fixed; width: 100%; background-color: #f1f1f1; text-align: center;">
@@ -95,7 +140,7 @@ if (isset($_POST['login'])) {
 <div style="margin-top: 5%; width: 100%;">
 <center><fieldset>
 		<legend>LOGIN TO PROCEED</legend>
-		<center><form method="post" action="emplgn.php" name="loginform">
+		<center><form method="post" action="emplgn.php" name="eloginform" onsubmit="return validateform()">
 			<table border="0" cellspacing="10" cellpadding="10">
 				<tr>
 					<td><label>Username :</label></td>

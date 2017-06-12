@@ -1,6 +1,11 @@
 <?php include "config.php"; ?>
 <?php 
-//echo
+session_start();
+if (!isset($_SESSION['user']) && !isset($_SESSION['pass'])) {
+	header("Location:error.php");
+}else {
+	$name = $_SESSION['user'];
+}
 $id = $_GET['id'];
 //sql query
 $sql = "SELECT * FROM laptop WHERE Emp_No = $id";
@@ -27,6 +32,7 @@ $frow = $fresult->fetch_assoc();
 	<li><a href="add.php">ADD NEW DATA</a></li>
 	<li><a href="create.php">CREATE NEW<br>ACCOUNT</a></li>
 	<li><a href="admin.php">ADMIN PANEL</a></li>
+	<li><a href="logout.php">LOGOUT</a></li>
 </ul>
 </div>
 <!--<div style="float:left; width:1%; background:#fff; height:100%; margin-top: 7.5%;"></div>-->
@@ -53,7 +59,6 @@ $frow = $fresult->fetch_assoc();
 		<th>Employee Designation</th>
 		<th>Comments</th>
 		<th>Uploaded-File Name</th>
-		<th>Uploaded-File Path</th>
 	</tr>
 	<?php while($row = $result->fetch_assoc()): ?>
 		<?php
@@ -66,8 +71,7 @@ $frow = $fresult->fetch_assoc();
 			echo "<td>".$row['Emp_Code']."</td>";
 			echo "<td>".$row['Emp_Design']."</td>";
 			echo "<td>".$row['Comments']."</td>";
-			echo "<td>".$frow['File_Name']."</td>";
-			echo "<td><a href=\"Viewf.php?id=$row[Emp_No]\"><img src='vallbtn.png' alt='view' width='80px' height='40px'></a></td>";   
+			echo "<td>","<a href=\"Viewf.php?id=$row[Emp_No]\" target=\"_blank\">",$frow['File_Name'],"</a>","</td>"; 
 			?>
 	<?php endwhile; ?>
 </table>
