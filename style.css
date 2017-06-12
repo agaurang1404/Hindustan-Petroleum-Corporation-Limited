@@ -1,0 +1,55 @@
+/*styling for sections major */
+header {
+	top: 0;
+	position: fixed;
+	width: 100%;
+}
+main {
+	margin-top: 10%;
+	padding: 5px;
+	/*width: 100%;*/
+}
+footer {
+	bottom: 0;
+	width: 100%;
+	position: fixed;
+	background-color: #002266;
+	color: white;
+	text-align: center;
+}
+#logo {
+	background-color: #f1f1f1;
+	text-align: center;
+}
+#nav_bg {
+	width: 100%;
+	position: relative;
+	padding-top: 0;
+}
+#sec {
+	float: right;
+	margin-right: 10px;
+
+}
+ul {
+	list-style-type: none;
+	padding: 0;
+	margin: 0;
+	overflow: hidden;
+	background-color: #002266;
+}
+li {
+	float: left;
+	margin-left: 1px;
+}
+li a{
+	display: block;
+	color: white;
+	text-align: center;
+	padding: 8px 10px;
+	text-decoration: none;
+}
+li a:hover {
+	background-color: #99ccff;
+}
+
